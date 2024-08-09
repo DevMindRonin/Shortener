@@ -1,0 +1,22 @@
+{
+  "name": "gshortener",
+  "version": "1.0.0",
+  "description": "Makes Url shorter",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon server.js",
+    "build": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.1",
+    "shortid": "^2.2.16"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}

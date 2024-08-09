@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-qquiv="X-UA-Compatible">    
+    <title>Shortener</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Make your links Shorter</h1>
+    <form action="/shortUrls" method="POST" class="my-4 form-inline">
+      <label for="fullUrl" class="sr-only">Url</label>
+      <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl" class="form-control col mr-3">
+      <button class="btn btn-success" type="submit">Shrink</button>
+    </form>
+    
+    <table class="table table-striped ">
+      <thead>
+        <tr>
+          <th>Full URL</th>
+          <th>Short URL</th>
+          <th>Clicks</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% shortUrls.forEach(shortUrl => { %>
+          <tr>
+            <td class="col-5" style="max-width: 300px; word-break: break-word;"><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
+            <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
+            <td><%= shortUrl.clicks %></td>
+            <td><button class="btn btn-outline-danger btn-sm" onclick="deleteRecord('<%= shortUrl._id %>')">Delete</button></td>
+          </tr>
+        <% }) %>
+    </div>
+      </tbody>
+    </table>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+  </script>
+ <script>
+  function deleteRecord(recordId) {
+    // Send a request to the server to delete a specific record
+    fetch(`/delete/${recordId}`, {
+      method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {window.location.href = '/'}) // refresh data from Mongoo
+  }
+</script>
+</body>
+</html>
